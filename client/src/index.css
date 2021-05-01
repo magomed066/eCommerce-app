@@ -6,7 +6,11 @@ main {
     position: relative;
 }
 
-
+.spinner {
+    text-align: center;
+    /* margin: 0 auto; */
+    margin-top: 6rem;
+}
 
 h3 {
     padding: 1rem 0;

@@ -1,13 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Card, Row, Col, ListGroup, Image, Button } from 'react-bootstrap'
-import products from '../db/products'
-import { Rating } from '../components'
+import { Rating, Spinner } from '../components'
+import axios from 'axios'
 
 const ProductPage = ({ match }) => {
-	const product = products.find((product) => product._id === match.params.id)
+	// const product = products.find((product) => product._id === match.params.id)
 
-	return (
+	const [product, setProduct] = useState({})
+	const [loading, setLoading] = useState(true)
+
+	useEffect(() => {
+		const fetchProduct = async () => {
+			const { data } = await axios.get(
+				`http://localhost:5000/api/products/${match.params.id}`,
+			)
+
+			if (data.status) {
+				setProduct(data.product)
+				setLoading(false)
+			}
+		}
+
+		fetchProduct()
+	}, [match.params.id])
+
+	return loading ? (
+		<Spinner />
+	) : (
 		<>
 			<Link className="btn btn-light" to="/">
 				Go back
@@ -30,7 +50,7 @@ const ProductPage = ({ match }) => {
 						</ListGroup.Item>
 						<ListGroup.Item>Price: ${product.price}</ListGroup.Item>
 						<ListGroup.Item>
-							Description: ${product.description}
+							Description: {product.description}
 						</ListGroup.Item>
 					</ListGroup>
 				</Col>
