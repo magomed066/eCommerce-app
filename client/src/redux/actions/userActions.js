@@ -3,6 +3,7 @@ import {
 	USER_LOGIN_REQUEST,
 	USER_LOGIN_SUCCESS,
 	USER_LOGIN_FAIL,
+	USER_LOGOUT,
 } from '../contstants'
 
 const url = 'http://localhost:5000/api/users'
@@ -33,4 +34,12 @@ export const login = (body) => async (dispatch) => {
 			payload: error.response.data.message,
 		})
 	}
+}
+
+export const logout = () => async (dispatch) => {
+	localStorage.removeItem('userInfo')
+
+	dispatch({
+		type: USER_LOGOUT,
+	})
 }
