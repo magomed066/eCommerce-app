@@ -2,8 +2,10 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
+import bodyParser from 'body-parser'
 import colors from 'colors'
 import productRouters from './routes/productRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 dotenv.config()
@@ -11,6 +13,7 @@ connectDB()
 
 const app = express()
 
+app.use(bodyParser.json())
 app.use(cors())
 
 app.get('/', async (req, res) => {
@@ -18,6 +21,7 @@ app.get('/', async (req, res) => {
 })
 
 app.use('/api', productRouters)
+app.use('/api/users', userRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
