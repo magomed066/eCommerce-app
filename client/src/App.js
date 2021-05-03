@@ -2,7 +2,13 @@ import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Footer, Header } from './components'
 import { Container } from 'react-bootstrap'
-import { HomePage, ProductPage, CartPage, LoginPage } from './Pages'
+import {
+	HomePage,
+	ProductPage,
+	CartPage,
+	LoginPage,
+	RegisterPage,
+} from './Pages'
 
 const App = () => {
 	return (
@@ -14,6 +20,7 @@ const App = () => {
 					<Route path="/product/:id" component={ProductPage} />
 					<Route path="/cart/:id?" component={CartPage} />
 					<Route path="/login" component={LoginPage} />
+					<Route path="/register" component={RegisterPage} />
 				</Container>
 			</main>
 			<Footer />

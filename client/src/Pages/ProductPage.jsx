@@ -78,7 +78,7 @@ const ProductPage = ({ match }) => {
 								{product.countInStock > 0 && (
 									<ListGroup.Item>
 										<Row>
-											<Col className="d-flex align-items-center justify-content-center">
+											<Col className="d-flex align-items-center">
 												Qty
 											</Col>
 											<Col>
